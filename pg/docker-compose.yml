@@ -1,0 +1,29 @@
+version: '2'
+services:
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=auuntoo
+      - POSTGRES_PASSWORD=auuntoo
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+  
+  adminer:
+    image: adminer:latest
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - 4000:8080
+    
+volumes:
+  db:
+    driver: local
+
+# networks:
+#   default:
+#     external:
+#       name: host-staging
