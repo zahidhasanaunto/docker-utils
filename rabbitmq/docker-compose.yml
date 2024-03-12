@@ -1,0 +1,24 @@
+version: '3'
+services:
+  rabbitmq:
+    image: 'rabbitmq:3-management'
+    container_name: 'rabbitmq'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - 'rabbitmq_data:/var/lib/rabbitmq'
+      - 'rabbitmq_log:/var/log/rabbitmq'
+    environment:
+      - RABBITMQ_DEFAULT_USER=auuntoo
+      - RABBITMQ_DEFAULT_PASS=auuntoo
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    restart: always
+
+volumes:
+  rabbitmq_data:
+  rabbitmq_log:

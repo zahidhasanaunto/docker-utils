@@ -19,17 +19,17 @@ services:
     ports:
       - 4000:8080
 
-  pgadmin:
-    container_name: pgadmin4
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: auuntoo@auuntoo.com
-      PGADMIN_DEFAULT_PASSWORD: auuntoo
-    ports:
-      - '4001:80'
-    depends_on:
-      - postgres
+  # pgadmin:
+  #   container_name: pgadmin4
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: auuntoo@auuntoo.com
+  #     PGADMIN_DEFAULT_PASSWORD: auuntoo
+  #   ports:
+  #     - '4001:80'
+  #   depends_on:
+  #     - postgres
 
 volumes:
   db:

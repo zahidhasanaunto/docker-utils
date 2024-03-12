@@ -1,29 +1,27 @@
-version: "3"
-services:
+version: '3.8'
 
-  db:
+services:
+  mysql:
     image: mysql:latest
-    container_name: mysql
-    volumes: 
-      - ./db_data:/var/lib/mysql
-    ports:
-      - 3306:3306
-    restart: unless-stopped
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: auuntoo
-      # MYSQL_DATABASE: cromwell
+      MYSQL_DATABASE: otel_db
       MYSQL_USER: auuntoo
       MYSQL_PASSWORD: auuntoo
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   phpmyadmin:
-    depends_on:
-      - db
     image: phpmyadmin/phpmyadmin:latest
-    container_name: phpadmin
+    restart: always
     environment:
-      PMA_HOST: db
-    links:
-      - db:db
+      PMA_HOST: mysql
+      PMA_PORT: 3306
     ports:
       - 4001:80
-    restart: unless-stopped
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
